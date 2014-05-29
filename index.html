@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Elmsln : The home of the elms learning network package" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Elmsln</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/btopro/elmsln">View on GitHub</a>
+
+          <h1 id="project_title">Elmsln</h1>
+          <h2 id="project_tagline">The home of the elms learning network package</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/btopro/elmsln/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/btopro/elmsln/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="elmsln" class="anchor" href="#elmsln"><span class="octicon octicon-link"></span></a>ELMSLN</h1>
+
+<p>This is the entire ELMS Learning Network as a repository.  It includes installation instructions for getting it stood up on your server as well as multiple git repositories for optimal management downstream.</p>
+
+<h1>
+<a name="faq" class="anchor" href="#faq"><span class="octicon octicon-link"></span></a>FAQ</h1>
+
+<h3>
+<a name="q-how-can-i-get-more-involved" class="anchor" href="#q-how-can-i-get-more-involved"><span class="octicon octicon-link"></span></a>Q. How can I get more involved?</h3>
+
+<p>The easiest way is to spin up the <a href="http://github.com/btopro/elmsln-vagrant">ELMSLN Vagrant</a>. Test, ask, jump in on the issue queues on github, drupal.org, twitter, email, PHONE or anywhere else that you can find pieces that will help build upon this work. We always welcome more issue reports.</p>
+
+<h3>
+<a name="q-why-doesnt-this-look-like-drupal" class="anchor" href="#q-why-doesnt-this-look-like-drupal"><span class="octicon octicon-link"></span></a>Q. Why doesn’t this look like Drupal?</h3>
+
+<p>Because it’s Drupal and other packages setup in an optimal format for a network of deployed distributions. This as an enterprise Drupal based application that is more "Drupal inside" then Drupal proper. Everything is still done in a completely core compliant way, it's just structured to maximize needed efficencies of a heavily networked ecosystem.</p>
+
+<p>Everything is setup in a manner that has flexibility, sustainability and long term system growth in mind. It’s using a patched version of a drush extension called DSLM to help manage the symlinks between items but it’s heavily symlink. This helps optimize APC as well as make it maintainable for a single person to manage 100s of sites with similar code pushes.</p>
+
+<h3>
+<a name="q-should-i-update-drupal-modules" class="anchor" href="#q-should-i-update-drupal-modules"><span class="octicon octicon-link"></span></a>Q. Should I update Drupal modules?</h3>
+
+<p>Anything that’s included in the enclosed core directory should not be updated outside of the schedule of updating versions of the code from the github repository (unless you know what you are doing). There are a few projects patched so the best way to get projects upgraded to the latest version is to test it in a vagrant instance, report on it in an issue queue, and then let the ELMSLN community vet the module / theme upgrade.  Once this has happened then it will be rolled into the final package.</p>
+
+<p>This is to ensure that all sites function properly after upgrades.  This package will be updated on versions once they are tested, any modules that you install in your config directory is on you to manage.  The general rule in Drupal is don’t hack core and the same is true with ELMSLN, don’t hack ELMSLN core; apply all your changes you want inside the config directory.</p>
+
+<h3>
+<a name="q-config-is-empty-what-do-i-put-there" class="anchor" href="#q-config-is-empty-what-do-i-put-there"><span class="octicon octicon-link"></span></a>Q. config is empty, what do I put there?</h3>
+
+<p>There is an example config repo so you can see how to construct one and build from it. You can check that out here <a href="https://github.com/btopro/elmsln-config-example">https://github.com/btopro/elmsln-config-example</a> .</p>
+
+<p>The Vagrant instance also has a config location that's managed on its own. Its only useful inside vagrant but if you want to see some ways you can add modules and change settings it's another good example: <a href="https://github.com/btopro/elmsln-config-vagrant/">https://github.com/btopro/elmsln-config-vagrant/</a></p>
+
+<h3>
+<a name="q-where-can-i-add-new-modules--themes" class="anchor" href="#q-where-can-i-add-new-modules--themes"><span class="octicon octicon-link"></span></a>Q. Where can I add new modules / themes?</h3>
+
+<p>All changes should be made inside the config directory in a location that aligns with its counterpart in the core directory.  For example, to add a new module for use in all sites, you’ll want to place it in elmsln/config/shared/drupal-7.x/modules.  This is the same area for themes and libraries.  Note: libraries support may be buggy because of how those are symlink over.</p>
+
+<p>There’s also a settings/shared_settings.php file that has settings you want applied to all sites by default.  This is where your environmental staging overrides can go, or you can switch the cache bins used by default.  The version that ships with this has APC and file cache support automatically setup and tuned though you can disable these if you don’t have those.</p>
+
+<p>Also make sure you never place an upgraded module in a different location from its default (such as updating views module by placing it in your config directory).  This will effectively WSOD / brick your site until you run drush rr against the sites that bricked. If you've run the elmsln-install.sh script included in this package, you'll have drush rr.</p>
+
+<h3>
+<a name="q-where-should-i-point-addresses" class="anchor" href="#q-where-should-i-point-addresses"><span class="octicon octicon-link"></span></a>Q. Where should I point addresses?</h3>
+
+<p>The domains directory is structured in the optimal way for managing sites.  The domains directory is ignored below the initial directories inside of it, meaning that your sites that get written here automatically won’t be pushed through git or updated.  If you remove directories or change the way sites are managed in anyway inside this location, you’ll need to add that area to your .gitignore (or stop using the github version).</p>
+
+<p>You can use this as a starting point and self manage from there but sticking as closely as possible to the structure of ELMSLN will help ensure upgrades down the road take correctly.</p>
+
+<h3>
+<a name="q-when-will-there-be-a-stable-release" class="anchor" href="#q-when-will-there-be-a-stable-release"><span class="octicon octicon-link"></span></a>Q. When will there be a stable release?</h3>
+
+<p>Very soon, there has been substancial progress made towards a point release thanks to investment in the <a href="http://github.com/btopro/elmsln-vagrant">ELMSLN Vagrant</a> installer.</p>
+
+<p>If it helps you sleep at night, we run dev in production. That's not to say you should yet, but the package is far more stable then the "dev" moniker.</p>
+
+<h3>
+<a name="q-if-thats-true-what-are-the-blockers-for-a-stable-release" class="anchor" href="#q-if-thats-true-what-are-the-blockers-for-a-stable-release"><span class="octicon octicon-link"></span></a>Q. If that's true, what are the blockers for a stable release?</h3>
+
+<ol>
+<li>Additional testing, probably about a month's worth, particularly around the install script to get the whole thing automatically installed.</li>
+<li>Merging the automation present in the ELMSLN Vagrant project back into elmsln-install.sh as an optional flag</li>
+<li>Installing default content (via optional flag or vagrant) for the CIS distribution so that you immediately don't go "ok, now what do I do?"</li>
+<li>Repackaging Nodequeues for CIS (right now they don't export from original source site and are well designed)</li>
+<li>Doing additional testing on the <code>vagrant provision</code> command to ensure that it only updates the state of the currently developed ELMSLN test-bed and not overwrites critical components.  Again, this is just for the development and testing harness but still critical to long term success of this project.</li>
+</ol><h3>
+<a name="q-how-would-you-classify-a-first-release" class="anchor" href="#q-how-would-you-classify-a-first-release"><span class="octicon octicon-link"></span></a>Q. How would you classify a first release?</h3>
+
+<p>Stable. Most likely jumping straight from dev to 1.0.  The many distributions of ELMS have been in beta usage for several months now.</p>
+
+<h3>
+<a name="q-how-awesome-is-it-to-try-and-solve-the-edtech-spaces-biggest-problem-every-day-you-walk-into-work" class="anchor" href="#q-how-awesome-is-it-to-try-and-solve-the-edtech-spaces-biggest-problem-every-day-you-walk-into-work"><span class="octicon octicon-link"></span></a>Q. How awesome is it to try and solve the edtech spaces biggest problem every day you walk into work?</h3>
+
+<p>You have no idea and it's why I'm tied so heavily to this work atmosphere. It rocks.  Also who said anything about walking into work to solve these problems..isn't it the weekend or late night or something right now?</p>
+
+<p>Enjoy!</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Elmsln maintained by <a href="https://github.com/btopro">btopro</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51500811-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
