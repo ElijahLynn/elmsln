@@ -42,7 +42,7 @@
 <h3>
 <a name="q-how-can-i-get-more-involved" class="anchor" href="#q-how-can-i-get-more-involved"><span class="octicon octicon-link"></span></a>Q. How can I get more involved?</h3>
 
-<p>The easiest way is to spin up the <a href="http://github.com/btopro/elmsln-vagrant">ELMSLN Vagrant</a>. Test, ask, jump in on the issue queues on github, drupal.org, twitter, email, PHONE or anywhere else that you can find pieces that will help build upon this work. We always welcome more issue reports.</p>
+<p>The easiest way is to setup an <a href="http://github.com/btopro/elmsln-developer">ELMSLN Developer</a> envrionment and run <a href="http://github.com/btopro/elmsln-vagrant">ELMSLN Vagrant</a>. Test, ask, jump in on the issue queues on github, drupal.org, twitter, email, PHONE or anywhere else that you can find pieces that will help build upon this work. We always welcome more issue reports.</p>
 
 <h3>
 <a name="q-why-doesnt-this-look-like-drupal" class="anchor" href="#q-why-doesnt-this-look-like-drupal"><span class="octicon octicon-link"></span></a>Q. Why doesn’t this look like Drupal?</h3>
@@ -84,19 +84,17 @@
 <h3>
 <a name="q-when-will-there-be-a-stable-release" class="anchor" href="#q-when-will-there-be-a-stable-release"><span class="octicon octicon-link"></span></a>Q. When will there be a stable release?</h3>
 
-<p>Very soon, there has been substancial progress made towards a point release thanks to investment in the <a href="http://github.com/btopro/elmsln-vagrant">ELMSLN Vagrant</a> installer.</p>
-
-<p>If it helps you sleep at night, we run dev in production. That's not to say you should yet, but the package is far more stable then the "dev" moniker.</p>
+<p>As soon as the blockers below are resolved (basically just time). If it helps you sleep at night, we run this in production and have been actively building off of this framework since May 2013. The package is far more stable then the "dev" moniker might otherwise suggest. Point releases require a differnet mindset from a developer / management perspective so we'll get there when the time is right.</p>
 
 <h3>
 <a name="q-if-thats-true-what-are-the-blockers-for-a-stable-release" class="anchor" href="#q-if-thats-true-what-are-the-blockers-for-a-stable-release"><span class="octicon octicon-link"></span></a>Q. If that's true, what are the blockers for a stable release?</h3>
 
 <ol>
-<li>Additional testing, probably about a month's worth, particularly around the install script to get the whole thing automatically installed.</li>
+<li>Additional testing, particularly around the install script to get the whole thing automatically installed in different environments. this is used in production multiple places as is but additional UI and broader based user testing is always helpful.</li>
 <li>Merging the automation present in the ELMSLN Vagrant project back into elmsln-install.sh as an optional flag</li>
-<li>Installing default content (via optional flag or vagrant) for the CIS distribution so that you immediately don't go "ok, now what do I do?"</li>
 <li>Repackaging Nodequeues for CIS (right now they don't export from original source site and are well designed)</li>
-<li>Doing additional testing on the <code>vagrant provision</code> command to ensure that it only updates the state of the currently developed ELMSLN test-bed and not overwrites critical components.  Again, this is just for the development and testing harness but still critical to long term success of this project.</li>
+<li>Doing additional testing on the <code>vagrant provision</code> command to ensure that it only updates the state of the currently developed ELMSLN test-bed and not overwrite critical components.</li>
+<li>Bash / drush script to automatically spider all sites and perform well structure updb and feature revert commands where it makes sense, as well as a plan for 1 project to have update hooks to apply network wide updates (Like all sites now require module A to be enabled and module B is depricated).</li>
 </ol><h3>
 <a name="q-how-would-you-classify-a-first-release" class="anchor" href="#q-how-would-you-classify-a-first-release"><span class="octicon octicon-link"></span></a>Q. How would you classify a first release?</h3>
 
